@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>User List</mat-card-title>
+  <mat-card-content>
+    <mat-selection-list #list [(ngModel)]="selectedOptions">
+      <ng-container *ngFor="let user of users">
+        <mat-list-option [value]="user._links.self.href"
+                         [selected]='user.selected' >
+          <img mat-list-avatar src="{{user.giphyUrl}}" alt="{{user.dni}}">
+          <h3 mat-line>
+            <a mat-button [routerLink]="['/user-edit', user._links.self.href.toString().substring((user._links.self.href.lastIndexOf('/'))+1)   ]">{{user.dni + ' - ' + user.name}}</a>
+          </h3>
+        </mat-list-option>
+      </ng-container>
+    </mat-selection-list>
+  </mat-card-content>
+
+  <p>
+  <button mat-fab color="primary" [routerLink]="['/user-add']">Add</button>
+  </p>
+  <p>
+  <button mat-raised-button color="secondary" (click)="remove()"
+          type="button">Delete</button>
+  </p>
+</mat-card>

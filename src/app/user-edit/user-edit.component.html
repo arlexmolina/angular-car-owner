@@ -1,0 +1,41 @@
+<mat-card>
+  <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{user.name ? 'Edit' : 'Add'}} User</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+      <input type="hidden" name="href" [(ngModel)]="user.href">
+      <mat-form-field>
+        <input matInput placeholder="User Dni" [(ngModel)]="user.dni"
+               required name="dni" #dni>
+      </mat-form-field>
+      </p>
+      <p>
+      <mat-form-field>
+        <input matInput placeholder="User Name" [(ngModel)]="user.name"
+               required name="name" #name>
+      </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="User profession" [(ngModel)]="user.profession"
+                 required name="profession" #profession>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!userForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(user.href)"
+              *ngIf="user.href" type="button">Delete</button>
+      <a mat-button routerLink="/user-list">Cancel</a>
+    </mat-card-actions>
+    <mat-card-footer>
+      <div class="giphy">
+        <img src="{{user.giphyUrl}}" alt="{{user.name}}">
+      </div>
+    </mat-card-footer>
+  </form>
+</mat-card>
